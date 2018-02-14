@@ -46,4 +46,58 @@
 		select answer_index, materi_atap, kondisi_atap, materi_dinding, kondisi_dinding, materi_lantai, kondisi_lantai 
 		from ".$this->config['table']['komponen']." where answer_index = %i
 	";
+
+	$config['view']['search_base'] = "
+		select 
+            l.answer_index
+            , l.lokasi_longitude as longitude
+            , l.lokasi_latitude as latitude
+            , ifnull(nullif(l.lokasi_altitude, ''), 0) as altitude
+            , d.nama
+            , ifnull(gender.option_name, '0. NOT SPECIFIED') as gender
+            , ifnull(d.alamat, '') as alamat
+            , ifnull(nullif(d.umur, ''), 0) as usia
+            , ifnull(nullif(d.jumlah_kk, ''), 0) as jumlah_kk
+            , kerja.option_name as sektor
+            , desa.option_name as desa 
+            , case
+				when (
+					d.penghasilan > 1 and d.tanah_milik = 1 and d.bantuan_perumahan = 3 and d.kontribusi_rumah <> 0
+					and (
+						k.kondisi_atap > 1 or k.kondisi_dinding > 1 or k.kondisi_lantai > 1
+					)) then '1'
+				else '0'
+			  end as penerima_bsps
+		from ".$this->config['table']['lokasi']." l 
+			left join ".$this->config['table']['data']." d on d.answer_index = l.answer_index 
+			left join ".$this->config['table']['komponen']." k on k.answer_index = l.answer_index 
+			left join ".$this->config['table']['pekerjaan']." kerja on kerja.option_id = d.pekerjaan 
+			left join ".$this->config['table']['gender']." gender on gender.option_id = d.gender 
+			left join ".$this->config['table']['desa']." desa on desa.option_id = d.desa 
+		where l.lokasi_longitude <> '' and l.lokasi_latitude <> ''
+	";
+
+	$config['view']['cetak'] = "
+		select
+			u.nama
+			, d.option_name as desa
+			, c.option_name as kecamatan
+			, u.umur
+			, p.option_name as pekerjaan
+			, u.alamat
+			, u.no_ktp
+			, ma.option_name as material_atap
+			, md.option_name as material_dinding
+			, ml.option_name as material_lantai
+		from ans_lokasi_umum l
+			left join ".$this->config['table']['data']." u on u.answer_index = l.answer_index
+			left join ".$this->config['table']['komponen']." k on k.answer_index = l.answer_index
+			left join ".$this->config['table']['desa']." d on d.option_id = u.desa
+			left join ".$this->config['table']['kecamatan']." c on c.option_id = l.kecamatan
+			left join ".$this->config['table']['pekerjaan']." p on p.option_id = u.pekerjaan
+			left join ".$this->config['table']['atap']." ma on ma.option_id = k.materi_atap
+			left join ".$this->config['table']['dinding']." md on md.option_id = k.materi_dinding
+			left join ".$this->config['table']['lantai']." ml on ml.option_id = k.materi_lantai
+		where l.answer_index = %i
+	";
 ?>

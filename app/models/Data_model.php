@@ -228,5 +228,165 @@ class data_model extends CI_Model {
             $answer_index++;
         }
     }
+
+    function process_template($answer_index)
+    {
+        $template = _config('template_path')."/template.docx";
+        $newFile = _config('template_path')."/template_temp.docx";
+
+        $query = str_replace("%i", $answer_index, _view('cetak'));
+        $result = _query($query)[0];
+
+        copy( $template, $newFile );
+
+        $zip = new ZipArchive();
+        
+        if ( $zip->open( $newFile, ZIPARCHIVE::CHECKCONS ) !== TRUE ) { echo 'failed to open template'; exit; }
+        
+        $file = 'word/document.xml';
+        $data = $zip->getFromName( $file );
+
+        $doc = new DOMDocument();
+        $doc->loadXML( $data );
+
+        $wts = $doc->getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'fldChar');
+
+        $fieldValues = array (
+            'm_1_nama' => $result['nama']
+            , 'm_6_desa' => $result['desa']
+            , "kecamatan" => $result['kecamatan']
+            , "m_4_umur_tahun" => $result['umur']
+            , "m_10_pekerjaan" => $result['pekerjaan']
+            , "m_5_alamat" => $result['alamat']
+            , "m_3_nomor_ktp" => $result['no_ktp']
+            , "m_12_material_atap_terluas" => $result['material_atap']
+            , "m_16_material_lantai_terluas" => $result['material_dinding']
+            , "m_14_material_dinding_terluas" => $result['material_lantai']
+        );
+
+        for ( $x = 0; $x < $wts->length; $x++ )
+        {
+            if ( $wts->item( $x )->attributes->item(0)->nodeName == 'w:fldCharType' && $wts->item( $x )->attributes->item(0)->nodeValue == 'begin' )
+            {
+                $newcount = $this->getMailMerge( $wts, $x, $fieldValues );
+                $x = $newcount;
+            }
+        }
+
+        $zip->deleteName($file);
+        $zip->addFromString( $file, $doc->saveXML() );
+        $zip->close();
+
+        $this->_push_file($newFile, "proposal_".$answer_index.".docx");
+    }
+
+    function getMailMerge( &$wts, $index, $dataarray )
+    {
+        $loop = true;
+        $startfield = false;
+        $setval = false;
+        $counter = $index;
+        $newcount = 0;
+        
+        while ( $loop ) {
+            if ( $wts->item( $counter )->attributes->item(0)->nodeName == 'w:fldCharType' ) {
+                $nodeName = '';
+                $nodeValue = '';
+        
+                switch( $wts->item( $counter )->attributes->item(0)->nodeValue ) {
+                    case 'begin':
+                        if ( $startfield ) {
+                            $counter = getMailMerge( $wts, $counter, $dataarray );
+                        }
+
+                        $startfield = true;
+                        
+                        if ( $wts->item( $counter )->parentNode->nextSibling ) {
+                            $nodeName = $wts->item( $counter )->parentNode->nextSibling->childNodes->item(1)->nodeName;
+                            $nodeValue = $wts->item( $counter )->parentNode->nextSibling->childNodes->item(1)->nodeValue;
+                        } else {
+                            // No sibling
+                            // check next node
+                            $nodeName = $wts->item( $counter + 1 )->parentNode->previousSibling->childNodes->item(1)->nodeName;
+                            $nodeValue = $wts->item( $counter + 1 )->parentNode->previousSibling->childNodes->item(1)->nodeValue;
+                        }
+
+                        if ( $nodeValue == 'date \@ "MMMM d, yyyy"' ) {
+                            $setval = true;
+                            $newval = date( "F j, Y" );
+                        }
+
+                        if ( substr( $nodeValue, 0, 11 ) == ' MERGEFIELD' ) {
+                            $setval = true;
+                            $newval = $dataarray[ strtolower( str_replace( '"', '', trim( substr( $nodeValue, 12 ) ) ) ) ];
+                        }
+
+                        $counter++;
+                        break;
+                    case 'separate':
+                        if ( $wts->item( $counter )->parentNode->nextSibling ) {
+                            $nodeName = $wts->item( $counter )->parentNode->nextSibling->childNodes->item(1)->nodeName;
+                            $nodeValue = $wts->item( $counter )->parentNode->nextSibling->childNodes->item(1)->nodeValue;
+                        } else {
+                            // No sibling
+                            // check next node
+                            $nodeName = $wts->item( $counter + 1 )->parentNode->previousSibling->childNodes->item(1)->nodeName;
+                            $nodeValue = $wts->item( $counter + 1 )->parentNode->previousSibling->childNodes->item(1)->nodeValue;
+                        }
+
+                        if ( $setval ) {
+                            $wts->item( $counter )->parentNode->nextSibling->childNodes->item(1)->nodeValue = $newval;
+                            $setval = false;
+                            $newval = '';
+                        }
+                        
+                        $counter++;
+                        break;
+                    case 'end':
+                        if( $startfield )
+                        {
+                            $startfield = false;
+                        }
+                        
+                        $loop = false;
+                }
+            }
+        }
+
+        return $counter;
+    }
+
+    function _push_file($path, $name)
+    {
+        // make sure it's a file before doing anything!
+        if(is_file($path))
+        {
+            // required for IE
+            if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off'); }
+
+            // get the file mime type using the file extension
+            $this->load->helper('file');
+
+            $mime = get_mime_by_extension($path);
+
+            // Build the headers to push out the file properly.
+            header('Pragma: public');     // required
+            header('Expires: 0');         // no cache
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Last-Modified: '.gmdate ('D, d M Y H:i:s', filemtime ($path)).' GMT');
+            header('Cache-Control: private',false);
+            header('Content-Type: '.$mime);  // Add the mime type from Code igniter.
+            header('Content-Disposition: attachment; filename="'.basename($name).'"');  // Add the file name
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Length: '.filesize($path)); // provide file size
+            header('Connection: close');
+
+            readfile($path); // push it out
+
+            unlink($path);
+            
+            exit();
+        }
+    }
 }
 ?>

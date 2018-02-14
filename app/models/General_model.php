@@ -12,27 +12,9 @@ class general_model extends CI_Model {
     	$keyword = _post('keyword');
     	$kecamatan = _post('kecamatan');
     	$desa = _post('desa');
+        $bsps = _post('bsps');
 
-    	$query = "
-    		select 
-                l.answer_index
-                , l.lokasi_longitude as longitude
-                , l.lokasi_latitude as latitude
-                , l.lokasi_altitude as altitude
-                , d.nama
-                , ifnull(gender.option_name, '0. NOT SPECIFIED') as gender
-                , ifnull(d.alamat, '') as alamat
-                , ifnull(nullif(d.umur, ''), 0) as usia
-                , ifnull(nullif(d.jumlah_kk, ''), 0) as jumlah_kk
-                , kerja.option_name as sektor
-                , desa.option_name as desa 
-    		from "._table('lokasi')." l 
-    			left join "._table('data')." d on d.answer_index = l.answer_index 
-    			left join "._table('pekerjaan')." kerja on kerja.option_id = d.pekerjaan 
-    			left join "._table('gender')." gender on kerja.option_id = d.gender 
-    			left join "._table('desa')." desa on desa.option_id = d.desa 
-    		where l.lokasi_longitude <> '' and l.lokasi_latitude <> ''
-    	";
+    	$query = _view('search_base');
 
     	$where = "";
 
@@ -70,7 +52,19 @@ class general_model extends CI_Model {
     		}
     	}
 
+        if($bsps != "") {
+            $where .= "
+                and (
+                    d.penghasilan > 1 and d.tanah_milik = 1 and d.bantuan_perumahan = 3 and d.kontribusi_rumah <> 0
+                    and (
+                        k.kondisi_atap > 1 or k.kondisi_dinding > 1 or k.kondisi_lantai > 1
+                    )
+                )
+            ";
+        }
+
     	$query .= $where;
+        //_d($query, true);
 
     	$data = _query($query);
 
@@ -91,11 +85,12 @@ class general_model extends CI_Model {
 		            "id": '.$item['answer_index'].',
 		            "nama": "'.$item['nama'].'",
 		            "jeniskelamin": "'.$item['gender'].'",
-		            "alamat": "'.$item['alamat'].'",
+		            "alamat": "'.trim(preg_replace('/\s+/', ' ', $item['alamat'])).'",
 		            "usia": '.$item['usia'].',
 		            "jumlahkk": '.$item['jumlah_kk'].',
 		            "sektor": "'.$item['sektor'].'",
-		            "desa": "'.$item['desa'].'"
+		            "desa": "'.$item['desa'].'",
+                    "bsps": "'.$item['penerima_bsps'].'"
 		        },
 		        "geometry": {
 		            "type": "Point",

@@ -8,16 +8,22 @@
 		            { "data" : "alamat" },
 		            { "data" : "jeniskelamin" },
 		            { "data" : "usia" },
-		            { "data" : "jumlahkk" },
 		            { "data" : "sektor" },
-		            { "data" : "desa" }
+		            { "data" : "desa" },
+		            { "data" : "jumlahkk" }
 		        ],
 		        "columnDefs": [{
 				    "targets": [8],
 				    "sClass": 'text-center',
 				    "render": function ( data, type, row ) {
 	                    var content = $("#table_action_content").html();
-	                    content = content.replace("{ID}",row.id);
+	                    content = content.replace(/{ID}/g,row.id);
+
+	                    if(row.bsps == "0")
+	                    	content = content.replace("{BSPS}", " d-none");
+	                    else
+	                    	content = content.replace("{BSPS}", "");
+
 	                    return content;
 	                }
 				}],
@@ -55,6 +61,11 @@
 				popupContent = popupContent.replace("{PEKERJAAN}",feature.properties.sektor);
 				popupContent = popupContent.replace("{DESA}",feature.properties.desa);
 				popupContent = popupContent.replace("{ID}",feature.properties.id);
+
+				if(feature.properties.bsps == "0")
+					popupContent = popupContent.replace("{BSPS}", " d-none");
+				else
+					popupContent = popupContent.replace("{BSPS}", "");
 
 				layer.bindPopup(popupContent);
 			}

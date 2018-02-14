@@ -30,13 +30,7 @@
 											</div>
 											<label for="kriteria">Kriteria</label>
 											<div class="checkbox">
-												<label><input type="checkbox"> Penerima BSPS</label>
-											</div>
-											<div class="checkbox">
-												<label><input type="checkbox"> Parameter 1</label>
-											</div>
-											<div class="checkbox">
-												<label><input type="checkbox"> Parameter 2</label>
+												<label><input type="checkbox" name="bsps" value="1"> Penerima BSPS</label>
 											</div>
 											<button class="btn btn-success btn-sm" id="sidebar_update" type="button">Update</button>
 										</div>

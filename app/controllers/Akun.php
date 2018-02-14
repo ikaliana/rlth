@@ -20,7 +20,7 @@ class Akun extends CI_Controller {
 		$this->load->view('general/footer', $arrData);
 	}
 
-	public function Profil() {
+	public function profil() {
 		$user = _userData("userinfo");
 		
 		if(!$user) redirect('akun/login');
@@ -42,7 +42,7 @@ class Akun extends CI_Controller {
 		$this->load->view('akun/unauthorized');
 	}
 
-	public function Save()
+	public function save()
 	{
 		$kode = _post("kode");
 		$nama = _post("nama");
@@ -58,9 +58,44 @@ class Akun extends CI_Controller {
 			$this->a->NewData($nama,$username,$password,$role,$email);
 	}
 
-	public function Delete() {
+	public function delete() {
 		$kode = _post("kode");
 
 		$this->a->DeleteData($kode);
+	}
+
+	public function ubahpassword()
+	{
+		$user = _userData("userinfo");
+		
+		if(!$user) redirect('akun/login');
+
+		$arrData['tpl'] = _tplInit("akun", false, false, false, '', 'akun/ubah_password_js');
+
+		$this->load->view('general/header', $arrData);
+		$this->load->view('akun/ubah_password', $arrData);
+		$this->load->view('general/footer', $arrData);
+	}
+
+	public function checkpassword() {
+		$user = _userData("userinfo");
+
+		$username = $user["username"];
+		$password = $this->input->post("password");
+
+		$row =  $this->a->GetUser($username,$password);
+
+		if (count($row)==0) echo("ERROR-".$username);
+		else if (count($row)==1) echo("SUCCESS");
+
+	}
+
+	public function savepassword() {
+		$user = _userData("userinfo");
+
+		$username = $user["username"];
+		$password = $this->input->post("password");
+
+		$this->a->UpdatePassword($username,$password);
 	}
 }

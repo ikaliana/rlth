@@ -25,11 +25,17 @@
 						</div>
 					</div>
 					<div id="table_action_content" style="display:none">
-				    	<a target="_blank" href="<?php echo site_url('data/detail'); ?>/{ID}" class="btn btn-default btn-xs btnDetail" role="button" data-id="{ID}">
+				    	<a target="_blank" href="<?php echo site_url('data/edit'); ?>/{ID}" class="btn btn-default btn-xs btnDetail" role="button" data-id="{ID}">
 				    		<i class="fa fa-fw fa-pencil"></i>
 				    	</a>
 				    </div>
 					<div class="float-menu">
+						<a class="float-item save-excel">
+							<i class="fa fa-fw fa-cloud-download"></i> Import data
+						</a>
+						<a class="float-item save-excel">
+							<i class="fa fa-fw fa-plus"></i> Tambah baru
+						</a>
 						<a class="float-item table-view">
 							<i class="fa fa-fw fa-th"></i> Table view
 						</a>

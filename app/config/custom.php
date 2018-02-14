@@ -7,6 +7,8 @@
 	#resources
 	$config['resx_path'] = 'libs/';
 	$config['base_path'] = $_SERVER['DOCUMENT_ROOT'];
+
+	$config['image_url'] = 'http://surveform.supernovateknologi.com/attachment/small?media_file=888/attachments/';
 	
 	$config['css'] = $config['resx_path'].'css';
 	$config['js'] = $config['resx_path'].'js';
@@ -16,6 +18,7 @@
 	$config['upload'] = $config['resx_path'].'uploads';
 
 	$config['upload_path'] = $config['base_path']."/".$config['upload'];
+	$config['template_path'] = $config['base_path']."/".$config['data'];
 
 	#combo tables
 	$config['table']['gender'] = 'opt_gender';

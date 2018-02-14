@@ -28,6 +28,18 @@ class Data extends CI_Controller {
 		$this->load->view('general/footer', $arrData);
 	}
 
+	public function edit($answer_index)
+	{
+		_checkSession();
+
+		$arrData['tpl'] = _tplInit("data", false, false, false, 'data/edit_css', 'data/edit_js');
+		$arrData['data'] = $this->d->get_data($answer_index);
+
+		$this->load->view('general/header', $arrData);
+		$this->load->view('data/edit', $arrData);
+		$this->load->view('general/footer', $arrData);
+	}
+
 	public function detail($answer_index)
 	{
 		_checkSession();
@@ -68,5 +80,10 @@ class Data extends CI_Controller {
 		$this->d->extract_data($file);
 
 		redirect("data/import");
+	}
+
+	public function cetak($answer_id)
+	{
+		$this->d->process_template($answer_id);
 	}
 }

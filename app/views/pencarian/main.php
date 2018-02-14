@@ -25,8 +25,11 @@
 						</div>
 					</div>
 					<div id="table_action_content" style="display:none">
-				    	<a target="_blank" href="<?php echo site_url('data/detail'); ?>/{ID}" class="btn btn-default btn-xs btnDetail" role="button" data-id="{ID}">
-				    		<i class="fa fa-fw fa-pencil"></i>
+				    	<a target="_blank" href="<?php echo site_url('data/detail'); ?>/{ID}" class="btn btn-default btn-xs btnDetail" role="button" data-id="{ID}" title="Lihat detail">
+				    		<i class="fa fa-fw fa-search"></i>
+				    	</a>
+				    	<a href="<?php echo site_url('data/cetak'); ?>/{ID}" class="btn btn-default btn-xs btnDetail{BSPS}" role="button" data-id="{ID}" title="Cetak proposal">
+				    		<i class="fa fa-fw fa-file-word-o"></i>
 				    	</a>
 				    </div>
 					<div class="float-menu">
