@@ -552,7 +552,7 @@ footer.sticky-footer {
 
 .container-fluid { position: relative; }
 
-#search {
+#search,#search_mini {
 	z-index: 1;
 
 	width: 250px;

@@ -100,4 +100,103 @@
 			left join ".$this->config['table']['lantai']." ml on ml.option_id = k.materi_lantai
 		where l.answer_index = %i
 	";
+
+	$config['view']['laporan_responden_per_kecamatan'] = "
+		select k.option_name as nama_kecamatan,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by k.option_name
+	";
+
+	$config['view']['laporan_responden_per_gender'] = "
+		select g.option_name as gender,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['gender']." g on u.gender=g.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by g.option_name
+	";
+
+	$config['view']['laporan_responden_per_pendidikan'] = "
+		select p.option_name as pendidikan,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['pendidikan']." p on u.pendidikan=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_pekerjaan'] = "
+		select p.option_name as pekerjaan,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['pekerjaan']." p on u.pekerjaan=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_penghasilan'] = "
+		select p.option_name as penghasilan,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['penghasilan']." p on u.penghasilan=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_status_rumah'] = "
+		select p.option_name as status,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['rumah']." p on u.rumah_milik=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_status_tanah'] = "
+		select p.option_name as status,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['tanah']." p on u.tanah_milik=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_rumah_lain'] = "
+		select p.option_name as status,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['ada_tidak']." p on u.rumah_lain=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_tanah_lain'] = "
+		select p.option_name as status,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['ada_tidak']." p on u.tanah_lain=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
+
+	$config['view']['laporan_responden_per_bantuan_rumah'] = "
+		select p.option_name as status,count(distinct u.answer_id) as jumlah
+		from ".$this->config['table']['data']." u
+			left join ".$this->config['table']['bantuan_rumah']." p on u.bantuan_perumahan=p.option_id
+			left join ".$this->config['table']['desa']." d on u.desa=d.option_id
+			left join ".$this->config['table']['kecamatan']." k on d.kecamatan_id=k.option_id
+		where d.option_id in (%1) and k.option_id in (%2)
+		group by p.option_name
+	";
 ?>

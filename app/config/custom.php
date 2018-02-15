@@ -30,7 +30,7 @@
 	$config['table']['rumah'] = 'opt_rumah_milik';
 	$config['table']['tanah'] = 'opt_tanah_milik';
 	$config['table']['ada_tidak'] = 'opt_ada_tidak';
-	$config['table']['bantuan_rumah'] = 'opt_penghasilan';
+	$config['table']['bantuan_rumah'] = 'opt_bantuan_rumah';
 	$config['table']['kontribusi'] = 'opt_kontribusi_rumah';
 	$config['table']['kondisi'] = 'opt_kondisi';
 	$config['table']['mck'] = 'opt_mck';

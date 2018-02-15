@@ -113,8 +113,6 @@
 				,deselectAllText : "Hilangkan pilihan"
 				,selectAllText : "Pilih semua" 
 			});
-			$('#kecamatan_report').selectpicker('selectAll');
-			$('#desa_report').selectpicker('selectAll');
 
 			$('#search-collapse').on('hide.bs.collapse', function () {
 				$("#col-search").addClass("minimal")

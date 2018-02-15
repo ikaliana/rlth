@@ -99,21 +99,21 @@ switch (ENVIRONMENT) {
 	case 'development':
 		$db['default']['hostname'] = 'localhost';
 		$db['default']['username'] = 'root';
-		$db['default']['password'] = 'beckham07';
+		$db['default']['password'] = '';
 		$db['default']['database'] = 'rlth';
 	break;
 
 	case 'testing':
 		$db['default']['hostname'] = 'localhost';
 		$db['default']['username'] = 'root';
-		$db['default']['password'] = 'beckham07';
+		$db['default']['password'] = '';
 		$db['default']['database'] = 'rtlh';
 	break;
 	
 	case 'production':
 		$db['default']['hostname'] = 'localhost';
 		$db['default']['username'] = 'root';
-		$db['default']['password'] = 'beckham07';
+		$db['default']['password'] = '';
 		$db['default']['database'] = 'rtlh';
 	break;
 
