@@ -7,14 +7,14 @@
 											<div class="row">
 												<div class="col-6">Daftar User</div>
 												<div class="col-6 text-right">
-													<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#frmDetailUser">
+													<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#frmDetailUser" data-kode="">
 														Tambah user
 													</button>
 												</div>
 											</div>
 										</div>										
 										<div class="card-body">
-											<table id="data" class="table table-striped table-bordered table-condensed" width="100%" cellspacing="0">
+											<table id="data" class="table table-striped table-bordered table-sm" width="100%" cellspacing="0">
 												<thead>
 										            <tr>
 										                <th>Nama Pengguna</th>

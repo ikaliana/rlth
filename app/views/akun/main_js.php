@@ -20,6 +20,7 @@
 		modal.find("#hMode").val(mode);
 
 		$('#role').selectpicker();
+		console.log(kode);
 
 		if(kode!="") modal.find("#password").attr("readonly","");
 	});

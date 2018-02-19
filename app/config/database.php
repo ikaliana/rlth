@@ -105,9 +105,9 @@ switch (ENVIRONMENT) {
 
 	case 'testing':
 		$db['default']['hostname'] = 'localhost';
-		$db['default']['username'] = 'root';
-		$db['default']['password'] = '';
-		$db['default']['database'] = 'rtlh';
+		$db['default']['username'] = 'u258575675_user';
+		$db['default']['password'] = 'qwerty';
+		$db['default']['database'] = 'u258575675_smd';
 	break;
 	
 	case 'production':
