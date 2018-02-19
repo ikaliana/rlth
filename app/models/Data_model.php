@@ -65,9 +65,9 @@ class data_model extends CI_Model {
             $answer_index = _post("answer_index");
 
         $this->process_data("lokasi", $ans_lokasi, $action, $answer_index);
-        $this->process_data("data", $ans_lokasi, $action, $answer_index);
-        $this->process_data("bangunan", $ans_lokasi, $action, $answer_index);
-        $this->process_data("komponen", $ans_lokasi, $action, $answer_index);
+        $this->process_data("data", $ans_data_umum, $action, $answer_index);
+        $this->process_data("bangunan", $ans_aspek_bangunan, $action, $answer_index);
+        $this->process_data("komponen", $ans_aspek_komponen, $action, $answer_index);
 
         $this->process_images($action, $answer_index);
     }

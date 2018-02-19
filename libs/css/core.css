@@ -571,7 +571,7 @@ footer.sticky-footer {
 	background: transparent;
 }
 
-.data-form { padding: 1rem; }
+.data-form { padding: 1rem; margin-bottom: 6rem; }
 .card-header {font-weight: 700; }
 
 .login-box {

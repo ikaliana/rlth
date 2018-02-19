@@ -78,11 +78,13 @@ class general_model extends CI_Model {
     {
     	$json = '{"type": "FeatureCollection","features": [';
 
+        $i=1;
     	foreach ($data as $item) {
     		$json .= '{
 		        "type": "Feature",
 		        "properties": {
-		            "id": '.$item['answer_index'].',
+		            "rownum": '.$i++.',
+                    "id": '.$item['answer_index'].',
 		            "nama": "'.$item['nama'].'",
 		            "jeniskelamin": "'.$item['gender'].'",
 		            "alamat": "'.trim(preg_replace('/\s+/', ' ', $item['alamat'])).'",

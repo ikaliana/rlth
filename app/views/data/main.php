@@ -30,10 +30,10 @@
 				    	</a>
 				    </div>
 					<div class="float-menu">
-						<a class="float-item save-excel">
+						<a class="float-item import-data" href="<?= _link('data/import') ?>">
 							<i class="fa fa-fw fa-cloud-download"></i> Import data
 						</a>
-						<a class="float-item save-excel">
+						<a class="float-item add-data" href="<?= _link('data/add') ?>">
 							<i class="fa fa-fw fa-plus"></i> Tambah baru
 						</a>
 						<a class="float-item table-view">

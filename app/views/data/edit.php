@@ -410,6 +410,7 @@
 										<div class="card-footer text-right">
 											<input type="hidden" name="answer_index" value="<?= $data['lokasi']['answer_index'] ?>" />
 											<input type="hidden" name="action" value="edit" />
+											<a href="javascript:window.top.close();" class="btn btn-sm btn-warning">Kembali</a>
 											<input type="submit" name="btnSimpan" value="Simpan" class="btn btn-sm btn-success" />
 										</div>
 									</div>

@@ -3,7 +3,7 @@
 			<?php if($tpl['load_map']) { ?>
 			var mapTable = $("#mapTables").DataTable({
 				"columns" : [
-		            { "data" : "id" },
+		            { "data" : "rownum" },
 		            { "data" : "nama" },
 		            { "data" : "alamat" },
 		            { "data" : "jeniskelamin" },
@@ -142,6 +142,16 @@
 
 			$(".save-excel").on('click', function() {
 				mapTable.button( '0-0' ).trigger();
+			});
+
+			$("#kecamatan").on('changed.bs.select', function (e, s) {
+				var value = JSON.stringify($(this).val());
+				
+				$.post( "<?= _link('ajax/combo') ?>", { s: "desa", f: "kecamatan_id", v: value }).done(function( data ) {
+					$("#desa").html(data);
+
+					$('#desa').selectpicker('refresh');
+				});
 			});
 			<?php } ?>
 		});

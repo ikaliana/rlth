@@ -190,10 +190,26 @@
 		$options = '';
 
 		if($field_name == '') return $options;
+		$field_value_test = json_decode($field_value);
 
 		$query = str_replace("%t", _table($section), _view('get_options_nested'));
-		$query = str_replace("%f", $field_name, $query);
-		$query = str_replace("%v", $field_value, $query);
+
+		if(is_array($field_value_test)) {
+			$field_value = $field_value_test;
+			$opt_multi = "(";
+
+			foreach ($field_value as $item) {
+				$opt_multi .= "(".$field_name." = '".$item."') OR ";
+			}
+
+			$opt_multi = substr($opt_multi, 0, strlen($opt_multi) - 4);
+			$opt_multi .= ")";
+
+			$query = str_replace("%f = '%v'", $opt_multi, $query);
+		} else {
+			$query = str_replace("%f", $field_name, $query);
+			$query = str_replace("%v", $field_value, $query);
+		}
 
         $data = _query($query);
 

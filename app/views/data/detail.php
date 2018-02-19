@@ -398,7 +398,7 @@
 											</div>
 										</div>
 										<div class="card-footer text-right">
-											<input type="submit" name="btnKembali" value="Kembali" class="btn btn-sm btn-primary" />
+											<a href="javascript:window.top.close();" class="btn btn-sm btn-primary">Kembali</a>
 										</div>
 									</div>
 									</form>

@@ -18,13 +18,13 @@
 											</div>
 											<div class="form-group">
 												<label for="keyword">Kecamatan</label>
-												<select class="selectpicker" name="kecamatan[]" data-width="100%" title="Pilih kecamatan" data-none-selected-text="Pilih kecamatan" data-live-search="true" multiple>
+												<select class="selectpicker" id="kecamatan" name="kecamatan[]" data-width="100%" title="Pilih kecamatan" data-none-selected-text="Pilih kecamatan" data-live-search="true" multiple>
 													<?= _generateOptions('kecamatan'); ?>
 												</select>
 											</div>
 											<div class="form-group">
 												<label for="keyword">Desa</label>
-												<select class="selectpicker" name="desa[]" data-width="100%" title="Pilih desa" data-live-search="true" multiple>
+												<select class="selectpicker" id="desa" name="desa[]" data-width="100%" title="Pilih desa" data-live-search="true" multiple>
 													<?= _generateOptions('desa'); ?>
 												</select>
 											</div>
@@ -32,7 +32,9 @@
 											<div class="checkbox">
 												<label><input type="checkbox" name="bsps" value="1"> Penerima BSPS</label>
 											</div>
-											<button class="btn btn-success btn-sm" id="sidebar_update" type="button">Update</button>
+											<button class="btn btn-success btn-sm" id="sidebar_update" type="button">
+											<?= ($tpl['active_menu'] == "pencarian") ? 'Cari' : 'Update' ?>
+											</button>
 										</div>
 										</form>
 									</div>

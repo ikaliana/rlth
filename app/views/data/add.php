@@ -399,6 +399,7 @@
 										</div>
 										<div class="card-footer text-right">
 											<input type="hidden" name="action" value="add" />
+											<a href="javascript:window.top.close();" class="btn btn-sm btn-warning">Kembali</a>
 											<input type="submit" name="btnSimpan" value="Simpan" class="btn btn-sm btn-success" />
 										</div>
 									</div>
