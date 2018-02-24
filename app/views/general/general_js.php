@@ -61,6 +61,10 @@
 				popupContent = popupContent.replace("{PEKERJAAN}",feature.properties.sektor);
 				popupContent = popupContent.replace("{DESA}",feature.properties.desa);
 				popupContent = popupContent.replace("{ID}",feature.properties.id);
+				popupContent = popupContent.replace("{ID}",feature.properties.id);
+				popupContent = popupContent.replace("{ID}",feature.properties.id);
+				popupContent = popupContent.replace("{ID}",feature.properties.id);
+				
 
 				if(feature.properties.bsps == "0")
 					popupContent = popupContent.replace("{BSPS}", " d-none");

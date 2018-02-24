@@ -34,25 +34,25 @@
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Lintang</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="lokasi-lokasi_longitude" />
+															<input type="text" class="form-control" placeholder="Lintang" name="lokasi-lokasi_longitude" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Bujur</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="lokasi-lokasi_latitude" />
+															<input type="text" class="form-control" placeholder="Bujur" name="lokasi-lokasi_latitude" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Kemiringan</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="lokasi-lokasi_altitude" />
+															<input type="text" class="form-control" placeholder="Kemiringan" name="lokasi-lokasi_altitude" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Presisi</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="lokasi-lokasi_precision" />
+															<input type="text" class="form-control" placeholder="Presisi" name="lokasi-lokasi_precision" />
 														</div>
 													</div>
 												</div>
@@ -60,7 +60,7 @@
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Nama</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="umum-nama" />
+															<input type="text" class="form-control" placeholder="Nama" name="umum-nama" />
 														</div>
 													</div>
 													<div class="form-group row">
@@ -74,13 +74,13 @@
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Nomor KTP</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="umum-no_ktp" />
+															<input type="text" class="form-control" placeholder="Nomor KTP" name="umum-no_ktp" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Umur</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="umum-umur" />
+															<input type="text" class="form-control" placeholder="Umur" name="umum-umur" />
 														</div>
 													</div>
 													<div class="form-group row">
@@ -108,13 +108,13 @@
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Nomor Kartu Keluarga</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="umum-no_kk" />
+															<input type="text" class="form-control" placeholder="Nomor Kartu Keluarga" name="umum-no_kk" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Jumlah Kepala Keluarga</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="umum-jumlah_kk" />
+															<input type="text" class="form-control" placeholder="Jumlah Kepala Keluarga" name="umum-jumlah_kk" />
 														</div>
 													</div>
 													<div class="form-group row">
@@ -337,13 +337,13 @@
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Luas Rumah (M<sup>2</sup>)</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="bangunan-luas_rumah" />
+															<input type="text" class="form-control" placeholder="Luas Rumah" name="bangunan-luas_rumah" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label for="keyword" class="col-md-2 col-form-label">Jumlah Penghuni (Orang)</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" placeholder="Kata kunci" name="bangunan-jumlah_penghuni" />
+															<input type="text" class="form-control" placeholder="Jumlah Penghuni" name="bangunan-jumlah_penghuni" />
 														</div>
 													</div>
 													<div class="form-group row">
@@ -399,7 +399,7 @@
 										</div>
 										<div class="card-footer text-right">
 											<input type="hidden" name="action" value="add" />
-											<a href="javascript:window.top.close();" class="btn btn-sm btn-warning">Kembali</a>
+											<a href="javascript:window.history.back();" class="btn btn-sm btn-warning">Kembali</a>
 											<input type="submit" name="btnSimpan" value="Simpan" class="btn btn-sm btn-success" />
 										</div>
 									</div>

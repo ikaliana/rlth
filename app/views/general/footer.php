@@ -21,7 +21,7 @@
 			<div class="panel-footer text-center">
 				<?php if($tpl['active_menu'] == "pencarian") { ?>
 				<a target="_blank" href="<?php echo site_url('data/detail'); ?>/{ID}" class="btn btn-default btn-sm map-popup-btn-detail" role="button" data-id="{ID}">Detail</a>
-				<a href="#{ID}" class="btn btn-default btn-sm map-popup-btn-cetak{BSPS}" role="button" data-id="{ID}">Cetak Proposal</a>
+				<a href="<?php echo site_url('data/cetak'); ?>/{ID}" class="btn btn-default btn-sm map-popup-btn-cetak{BSPS}" role="button" data-id="{ID}">Cetak Proposal</a>
 				<?php } else if($tpl['active_menu'] == "data") { ?>
 				<a target="_blank" href="<?php echo site_url('data/edit'); ?>/{ID}" class="btn btn-default btn-sm map-popup-btn-detail" role="button" data-id="{ID}">Edit</a>
 				<?php } ?>
