@@ -5,8 +5,16 @@
 	$config['encryption_iv'] = "qRxzxT3x8Q7NszkH";
 	
 	#resources
+	$root_path = $_SERVER['DOCUMENT_ROOT']."/";
+	$script_filename = $_SERVER['SCRIPT_FILENAME'];
+	$script_full = explode("/",$script_filename);
+	$script_name = $script_full[count($script_full)-1];
+	$dir_path = str_replace($root_path,"",$script_filename);
+	$dir_path = str_replace($script_name, "", $dir_path);
+	$dir_path = substr($dir_path, 0, strlen($dir_path)-1);
+
 	$config['resx_path'] = 'libs/';
-	$config['base_path'] = $_SERVER['DOCUMENT_ROOT'];
+	$config['base_path'] = $_SERVER['DOCUMENT_ROOT'].( ($dir_path != "") ? "/".$dir_path : "" );
 
 	$config['image_url'] = 'http://surveform.supernovateknologi.com/attachment/small?media_file=888/attachments/';
 	
