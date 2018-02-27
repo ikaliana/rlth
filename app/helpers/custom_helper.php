@@ -239,6 +239,12 @@
 		return _groupAccess(["Administrator","Super Admin"]);
 	}
 
+	function _isLogin() {
+        $ci =& get_instance();
+        $user = $ci->session->userdata("userinfo");
+        return ($user);		
+	}
+
 	function _groupAccess($role)   
     {
         $ci =& get_instance();

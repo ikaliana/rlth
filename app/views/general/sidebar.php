@@ -23,22 +23,28 @@
 	    				<span class="nav-link-text">Pelaporan</span>
 	    			</a>
 	    		</li>
+	    		<?php if(_isLogin()) { ?>
+
 	    		<li class="nav-item<?= _menu($tpl, 'data') ?>" data-toggle="tooltip" data-placement="right" title="Edit">
 	    			<a class="nav-link" href="<?= _link('data') ?>">
 	    				<i class="fa fa-fw fa-pencil"></i>
 	    				<span class="nav-link-text">Data</span>
 	    			</a>
 	    		</li>
+	    		<?php if(_isAuthorized()) { ?>
 	    		<li class="nav-item<?= _menu($tpl, 'akun') ?>" data-toggle="tooltip" data-placement="right" title="Users">
 	    			<a class="nav-link" href="<?= _link('akun') ?>">
 	    				<i class="fa fa-fw fa-users"></i>
 	    				<span class="nav-link-text">Kelola Pengguna</span>
 	    			</a>
 	    		</li>
+	    		<?php } ?>
+
+	    		<?php } ?>
 	    	</ul>
 	    	<ul class="navbar-nav ml-auto">
 	    		<li class="nav-item dropdown">
-	    			<?php if(_isAuthorized()) { ?>
+	    			<?php if(_isLogin()) { ?>
 	    			<a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    				Selamat datang, <strong><?= _userData('userinfo', 'name') ?></strong>
 	    			</a>

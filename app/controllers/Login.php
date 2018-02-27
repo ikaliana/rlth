@@ -10,6 +10,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
+		if(_isLogin()) redirect('pencarian');
 		$this->load->view('login/main');
 		$this->load->view('login/login_js');
 	}
