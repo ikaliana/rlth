@@ -237,6 +237,42 @@ class data_model extends CI_Model {
         $query = str_replace("%i", $answer_index, _view('cetak'));
         $result = _query($query)[0];
 
+        $fieldValues = array (
+            'M_1_NAMA' => $result['nama']
+            , 'M_6_DESA' => $result['desa']
+            , "KECAMATAN" => $result['kecamatan']
+            , "M_4_UMUR_TAHUN" => $result['umur']
+            , "M_10_PEKERJAAN" => $result['pekerjaan']
+            , "M_5_ALAMAT" => $result['alamat']
+            , "M_3_NOMOR_KTP" => $result['no_ktp']
+            , "M_12_MATERIAL_ATAP_TERLUAS" => $result['material_atap']
+            , "M_16_MATERIAL_LANTAI_TERLUAS" => $result['material_dinding']
+            , "M_14_MATERIAL_DINDING_TERLUAS" => $result['material_lantai']
+        );
+        
+        $this->load->library('words');
+
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($template);
+
+        foreach ($fieldValues as $key => $value) {
+            $templateProcessor->setValue($key, $value);
+        }
+
+        $templateProcessor->setImageValue("DENAH", "http://via.placeholder.com/350x150");
+        
+        $templateProcessor->saveAs($newFile);
+
+        $this->_push_file($newFile, "proposal_".$answer_index.".docx");
+    }
+
+    function _process_template($answer_index)
+    {
+        $template = _config('template_path')."/template.docx";
+        $newFile = _config('template_path')."/template_temp.docx";
+
+        $query = str_replace("%i", $answer_index, _view('cetak'));
+        $result = _query($query)[0];
+
         copy( $template, $newFile );
 
         $zip = new ZipArchive();
@@ -277,7 +313,7 @@ class data_model extends CI_Model {
         $zip->addFromString( $file, $doc->saveXML() );
         $zip->close();
 
-        $this->_push_file($newFile, "proposal_".$answer_index.".docx");
+        //$this->_push_file($newFile, "proposal_".$answer_index.".docx");
     }
 
     function getMailMerge( &$wts, $index, $dataarray )
