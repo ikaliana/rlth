@@ -258,7 +258,18 @@ class data_model extends CI_Model {
             $templateProcessor->setValue($key, $value);
         }
 
-        $templateProcessor->setImageValue("DENAH", "http://via.placeholder.com/350x150");
+        $imageValues = array (
+            'F_PERSPEKTIF' => $result['perspektif']
+            , 'F_DEPAN' => $result['depan']
+            , "F_KIRI" => $result['kiri']
+            , "F_KANAN" => $result['kanan']
+        );
+
+        foreach ($imageValues as $key => $value) {
+            $templateProcessor->setImageValue($key, _config('image_url').$value);
+        }
+
+        //$templateProcessor->setImageValue("DENAH", "http://via.placeholder.com/350x150");
         
         $templateProcessor->saveAs($newFile);
 

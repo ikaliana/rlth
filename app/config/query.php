@@ -89,9 +89,20 @@
 			, ma.option_name as material_atap
 			, md.option_name as material_dinding
 			, ml.option_name as material_lantai
+			, f.perspektif
+			, f.depan
+			, f.kiri
+			, f.kanan
+			, f.atap
+			, f.lantai
+			, f.dinding
+			, f.responden
+			, f.ktp
+			, f.kartu_keluarga
 		from ans_lokasi_umum l
 			left join ".$this->config['table']['data']." u on u.answer_index = l.answer_index
 			left join ".$this->config['table']['komponen']." k on k.answer_index = l.answer_index
+			left join ".$this->config['table']['foto']." f on f.answer_index = l.answer_index
 			left join ".$this->config['table']['desa']." d on d.option_id = u.desa
 			left join ".$this->config['table']['kecamatan']." c on c.option_id = l.kecamatan
 			left join ".$this->config['table']['pekerjaan']." p on p.option_id = u.pekerjaan
